@@ -1,0 +1,25 @@
+apiVersion: apigatewayv2.services.k8s.aws/v1alpha1
+  kind: API
+  metadata:
+    name: NLBAPI
+  spec:
+    body: '{
+              "openapi": "3.0.1",
+              "info": {
+                "title": "ack-apigwv2-import-test",
+                "version": "v1"
+              },
+              "paths": {
+                "/": {
+                  "get": {
+                    "x-amazon-apigateway-integration": {
+                      "uri": "http://k8s-echoserv-echoserv-61e3ab1945-4cb7b9fcdfe07cbf.elb.eu-north-1.amazonaws.com",
+                      "httpMethod": "GET",
+                      "type": "HTTP_PROXY",
+                      "payloadFormatVersion": "1.0"
+                    }
+                  }
+                }
+              },
+              "components": {}
+          }'
